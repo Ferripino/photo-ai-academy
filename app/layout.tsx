@@ -16,8 +16,8 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Photo AI Academy – Master Mobile Photography with AI',
-  description: 'Learn mobile photography with practical content for beginners. Master camera settings, lighting, composition, and AI prompts. Enroll now for $19.',
+  title: 'Photo AI Academy – Fotografía móvil con IA',
+  description: 'Aprende fórmulas simples y repetibles para hacer mejores fotos con tu móvil. Lecciones prácticas de fotografía móvil, composición, iluminación y edición con IA.',
   generator: 'v0.app',
   openGraph: {
     title: 'Photo AI Academy',
