@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { ArrowRight, Camera, ChevronDown, Clock3, Lightbulb, Menu, MessageCircle, Sparkles, Star, SunMedium, WandSparkles, X } from 'lucide-react'
+import { ArrowRight, Camera, ChevronDown, Clock3, Lightbulb, Menu, MessageCircle, Sparkles, Star, SunMedium, WandSparkles, X, CheckCircle2 } from 'lucide-react'
 
 const checkoutUrl = 'https://lemon-squeezy.com/checkout/placeholder'
 const heroImage = 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=1800&h=1200&fit=crop&auto=format'
@@ -34,26 +34,285 @@ function Reveal({ children, className = '' }: { children: React.ReactNode; class
 
 export function Header() {
   const [open, setOpen] = useState(false)
-  return <header className="absolute inset-x-0 top-0 z-20"><nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-5 sm:px-6 lg:px-8" aria-label="Navegación principal"><a href="#top" aria-label="Inicio de Photo AI Academy" className="group inline-flex items-center"><span className="font-sans text-xl font-semibold uppercase tracking-[-.06em] text-foreground transition-colors duration-300 group-hover:text-neon-lime sm:text-2xl lg:text-[1.7rem]">Photo <span className="text-neon-lime">AI</span> Academy</span></a><div className="hidden items-center gap-8 text-xs text-foreground/70 md:flex">{navLinks.map(([label, href]) => <a key={href} href={href} className="transition-colors hover:text-neon-lime">{label}</a>)}</div><div className="hidden md:block"><EnrollButton>Inscríbete ahora</EnrollButton></div><button type="button" aria-label={open ? 'Cerrar menú' : 'Abrir menú'} aria-expanded={open} onClick={() => setOpen(!open)} className="rounded-lg border border-white/15 p-2 text-neon-lime md:hidden">{open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}</button></nav>{open && <div className="mx-4 rounded-2xl border border-white/15 bg-charcoal/95 p-4 shadow-2xl backdrop-blur-xl md:hidden"><div className="flex flex-col gap-1">{navLinks.map(([label, href]) => <a key={href} href={href} onClick={() => setOpen(false)} className="rounded-xl px-4 py-4 text-base text-foreground transition-colors hover:bg-white/5 hover:text-neon-lime">{label}</a>)}<EnrollButton className="mt-2 w-full">Inscríbete ahora</EnrollButton></div></div>}</header>
+  return <header className="absolute inset-x-0 top-0 z-20"><nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-5 sm:px-6 lg:px-8" aria-label="Navegación principal"><a href="#top" aria-label="Inicio de Photo AI Academy" className="group inline-flex items-center"><span className="font-sans text-xl font-semibold uppercase tracking-[-.06em] text-foreground transition-colors duration-300 group-hover:text-neon-lime sm:text-2xl lg:text-[1.7rem]">Photo <span className="text-neon-lime">AI</span> Academy</span></a><div className="hidden items-center gap-8 text-xs text-foreground/70 md:flex">{navLinks.map(([label, href]) => <a key={href} href={href} className="transition-colors hover:text-neon-lime">{label}</a>)}</div><button type="button" aria-label={open ? 'Cerrar menú' : 'Abrir menú'} aria-expanded={open} onClick={() => setOpen(!open)} className="rounded-lg border border-white/15 p-2 text-neon-lime md:hidden">{open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}</button></nav>{open && <div className="mx-4 rounded-2xl border border-white/15 bg-charcoal/95 p-4 shadow-2xl backdrop-blur-xl md:hidden"><div className="flex flex-col gap-1">{navLinks.map(([label, href]) => <a key={href} href={href} onClick={() => setOpen(false)} className="rounded-xl px-4 py-4 text-base text-foreground transition-colors hover:bg-white/5 hover:text-neon-lime">{label}</a>)}</div></div>}</header>
 }
 
-export function Hero() { return <section id="top" className="relative flex min-h-[760px] items-end overflow-hidden pb-16 pt-36 sm:min-h-[850px] sm:pb-24"><img src={heroImage} alt="Persona haciendo una fotografía con su teléfono móvil" loading="lazy" className="absolute inset-0 h-full w-full object-cover" /><div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,13,22,.98)_0%,rgba(8,13,22,.78)_45%,rgba(8,13,22,.22)_100%)]" /><div className="absolute inset-0 bg-[linear-gradient(0deg,#080d16_0%,transparent_54%)]" /><div className="absolute inset-0 opacity-30 [background-image:radial-gradient(rgba(105,245,198,.18)_1px,transparent_1px)] [background-size:22px_22px]" /><div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8"><div className="max-w-4xl reveal"><Eyebrow>Photo AI Academy / Starter</Eyebrow><h1 className="mt-6 max-w-4xl text-balance font-sans text-5xl font-semibold leading-[.98] tracking-[-.06em] text-foreground sm:text-7xl lg:text-8xl">Haz que tu móvil<br /><span className="bg-gradient-to-r from-neon-lime via-neon-cyan to-neon-violet bg-clip-text text-transparent">vea diferente.</span></h1><p className="mt-8 max-w-xl text-base leading-7 text-foreground/70 sm:text-lg">Contenido práctico para transformar tus fotos usando solo tu teléfono y herramientas de IA.</p><div className="mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center"><EnrollButton>Inscríbete ahora – 19 USD</EnrollButton><span className="flex items-center gap-2 text-xs text-foreground/60"><Clock3 className="h-4 w-4 text-neon-pink" />Oferta limitada — termina en 2 horas</span></div><div className="mt-16 flex items-center gap-4 text-xs text-foreground/50"><div className="flex -space-x-2">{avatars.slice(0, 3).map((src, i) => <img key={src} src={src} alt={`Alumno de fotografía ${i + 1}`} loading="lazy" className="h-8 w-8 rounded-full border-2 border-charcoal object-cover" />)}</div><span>Creado para quienes fotografían con su móvil.</span></div></div></div></section> }
+export function Hero() { 
+  return <section id="top" className="relative flex min-h-[760px] items-end overflow-hidden pb-16 pt-36 sm:min-h-[850px] sm:pb-24">
+    <video 
+      src="/img/video.mp4" 
+      autoPlay 
+      muted 
+      playsInline 
+      loop 
+      preload="metadata"
+      crossOrigin="anonymous"
+      className="absolute inset-0 h-full w-full object-cover" 
+    />
+    <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,13,22,.98)_0%,rgba(8,13,22,.78)_45%,rgba(8,13,22,.22)_100%)]" />
+    <div className="absolute inset-0 bg-[linear-gradient(0deg,#080d16_0%,transparent_54%)]" />
+    <div className="absolute inset-0 opacity-30 [background-image:radial-gradient(rgba(105,245,198,.18)_1px,transparent_1px)] [background-size:22px_22px]" />
+    <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl reveal">
+        <Eyebrow>Photo AI Academy / Starter</Eyebrow>
+        <h1 className="mt-6 max-w-4xl text-balance font-sans text-5xl font-semibold leading-[.98] tracking-[-.06em] text-foreground sm:text-7xl lg:text-8xl">Haz que tu móvil<br /><span className="bg-gradient-to-r from-neon-lime via-neon-cyan to-neon-violet bg-clip-text text-transparent">vea diferente.</span></h1>
+        <p className="mt-8 max-w-xl text-base leading-7 text-foreground/70 sm:text-lg">Contenido práctico para transformar tus fotos usando solo tu teléfono y herramientas de IA.</p>
+        <div className="mt-16 flex items-center gap-4 text-xs text-foreground/50">
+          <div className="flex -space-x-2">{avatars.slice(0, 3).map((src, i) => <img key={src} src={src} alt={`Alumno de fotografía ${i + 1}`} loading="lazy" className="h-8 w-8 rounded-full border-2 border-charcoal object-cover" />)}</div>
+          <span>Creado para quienes fotografían con su móvil.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+}
 
-export function Problem() { return <section className="relative overflow-hidden border-b border-white/10 bg-charcoal py-24 sm:py-32"><Reveal className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[.8fr_1.2fr] lg:items-center lg:px-8"><div className="relative overflow-hidden rounded-3xl border border-white/10 bg-panel/60 p-2 shadow-2xl backdrop-blur-md"><img src={frustrationImage} alt="Persona revisando una fotografía en un portátil" loading="lazy" className="aspect-[4/3] w-full rounded-2xl object-cover opacity-85 transition-transform duration-700 hover:scale-105" /><div className="absolute bottom-6 left-6 rounded-xl border border-white/15 bg-charcoal/70 px-4 py-3 backdrop-blur-md"><p className="font-mono text-[10px] uppercase tracking-widest text-neon-pink">Antes</p><p className="mt-1 text-sm text-foreground/80">Mismo móvil. Otra mirada.</p></div></div><div><Eyebrow>El punto de partida</Eyebrow><h2 className="mt-5 max-w-2xl text-balance font-sans text-4xl font-semibold leading-[1.05] tracking-[-.045em] text-foreground sm:text-6xl">¿Cansado de hacer fotos aburridas?</h2><p className="mt-7 max-w-xl text-lg leading-8 text-muted-foreground">La mayoría hace fotos normales porque no conoce las técnicas sencillas que usan los profesionales. Las grandes fotos no requieren talento: requieren fórmulas.</p></div></Reveal></section> }
+export function Problem() { 
+  return <section className="relative overflow-hidden border-b border-white/10 bg-charcoal py-24 sm:py-32">
+    <Reveal className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[.8fr_1.2fr] lg:items-center lg:px-8">
+      <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-panel/60 p-2 shadow-2xl backdrop-blur-md">
+        <img src={frustrationImage} alt="Persona revisando una fotografía en un portátil" loading="lazy" className="aspect-[4/3] w-full rounded-2xl object-cover opacity-85 transition-transform duration-700 hover:scale-105" />
+        <div className="absolute bottom-6 left-6 rounded-xl border border-white/15 bg-charcoal/70 px-4 py-3 backdrop-blur-md">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-neon-pink">Antes</p>
+          <p className="mt-1 text-sm text-foreground/80">Mismo móvil. Otra mirada.</p>
+        </div>
+      </div>
+      <div>
+        <Eyebrow>El punto de partida</Eyebrow>
+        <h2 className="mt-5 max-w-2xl text-balance font-sans text-4xl font-semibold leading-[1.05] tracking-[-.045em] text-foreground sm:text-6xl">¿Cansado de hacer fotos aburridas?</h2>
+        <p className="mt-7 max-w-xl text-lg leading-8 text-muted-foreground">La mayoría hace fotos normales porque no conoce las técnicas sencillas que usan los profesionales. Las grandes fotos no requieren talento: requieren fórmulas.</p>
+        <p className="mt-6 max-w-xl text-base leading-8 text-muted-foreground">¿Alguna vez te has quedado sin ideas para tomar fotos? Quizás estás en casa... o en tu paseo diario. Sacas tu móvil para tomar una foto y la frustración se apodera de ti. Tu vecindario se siente aburrido. Tu hogar se siente ordinario. Incluso cuando viajas a un lugar hermoso, terminas tomando las mismas fotos que todos los demás.</p>
+      </div>
+    </Reveal>
+  </section>
+}
+
+export function Formulas() {
+  return <section className="relative overflow-hidden border-b border-white/10 bg-panel py-24 sm:py-32">
+    <Reveal className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="grid gap-12 lg:grid-cols-[1.2fr_.8fr] lg:items-center">
+        <div>
+          <Eyebrow>Las fórmulas</Eyebrow>
+          <h2 className="mt-5 max-w-2xl text-balance font-sans text-4xl font-semibold leading-[1.05] tracking-[-.045em] text-foreground sm:text-6xl">Los profesionales usan fórmulas<br /><span className="text-neon-lime">simples y repetibles.</span></h2>
+          <p className="mt-7 max-w-xl text-lg leading-8 text-muted-foreground">No tienen un &apos;ojo de fotógrafo&apos; especial. Usan técnicas específicas que funcionan siempre. Como recetas de cocina: te muestran exactamente qué hacer, dónde pararte, qué fotografiar y qué configuraciones usar.</p>
+          <div className="mt-12 space-y-4">{['Fórmulas para cada situación', 'Resultados garantizados', 'Cualquiera puede usarlas'].map((item) => <div key={item} className="flex items-center gap-3"><CheckCircle2 className="h-5 w-5 shrink-0 text-neon-lime" /><span className="text-base text-foreground">{item}</span></div>)}</div>
+        </div>
+        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-charcoal/60 p-2 shadow-2xl backdrop-blur-md"><video src="/img/presentacion-curso.mp4" autoPlay muted playsInline loop preload="metadata" crossOrigin="anonymous" className="aspect-square w-full rounded-2xl object-cover" /></div>
+      </div>
+    </Reveal>
+  </section>
+}
 
 export function Solution() { const courseTopics = [{ title: 'Configuración de cámara móvil', description: 'Aprende a controlar los ajustes, la exposición y el enfoque de tu móvil para tomar fotos profesionales.', image: 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=600&h=600&fit=crop&auto=format', icon: Camera }, { title: 'Técnicas de iluminación', description: 'Domina la luz natural, las sombras y el momento dorado para iluminar tus fotos de manera profesional.', image: 'https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=600&h=600&fit=crop&auto=format', icon: Lightbulb }, { title: 'Composición y encuadre', description: 'Mejora tus imágenes usando la regla de los tercios, el encuadre estratégico y las líneas guía.', image: 'https://images.unsplash.com/photo-1611532736579-6b16e2b50449?w=600&h=600&fit=crop&auto=format', icon: WandSparkles }, { title: 'Hora dorada y edición con IA', description: 'Elige el momento perfecto de la hora dorada y crea prompts de IA para editar tus fotos con intención.', image: lessonImages[3], icon: SunMedium }]; return <section id="curso" className="relative overflow-hidden border-b border-white/10 bg-panel py-24 sm:py-32"><div className="absolute inset-0 opacity-20 [background-image:linear-gradient(rgba(255,255,255,.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.05)_1px,transparent_1px)] [background-size:64px_64px]" /><Reveal className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"><div className="mb-12 flex flex-col justify-between gap-6 sm:flex-row sm:items-end"><div><Eyebrow>Dentro de Starter</Eyebrow><h2 className="mt-5 text-balance font-sans text-4xl font-semibold tracking-[-.045em] text-foreground sm:text-6xl">Todo lo que aprenderás<br /><span className="text-neon-cyan">en un solo recorrido.</span></h2></div><p className="max-w-sm text-sm leading-6 text-muted-foreground">Un recorrido práctico para dominar la fotografía móvil y editar con intención.</p></div><div className="grid gap-6 sm:grid-cols-2">{courseTopics.map(({ title, description, image, icon: Icon }) => <article key={title} className="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-charcoal/70 shadow-xl backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-neon-cyan/50"><div className="relative h-48 overflow-hidden bg-panel"><img src={image} alt={title} loading="lazy" className="block h-full w-full object-cover transition-transform duration-500 will-change-transform group-hover:scale-105" /><div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/40 to-transparent" /></div><div className="flex flex-1 flex-col gap-4 p-6"><div className="flex items-center gap-2"><Icon className="h-5 w-5 text-neon-lime" /><span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Lección</span></div><h3 className="text-lg font-semibold leading-snug text-foreground">{title}</h3><p className="text-sm leading-6 text-muted-foreground">{description}</p></div></article>)}</div></Reveal></section> }
 
 export function Instructors() { const names = ['Carlos M.', 'Fotógrafo experto', 'Especialista en IA', 'Mentor de fotografía']; return <section id="expertos" className="border-b border-white/10 bg-charcoal py-24 sm:py-32"><Reveal className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"><div className="flex flex-col justify-between gap-8 md:flex-row md:items-end"><div><Eyebrow>Tus guías</Eyebrow><h2 className="mt-5 max-w-2xl text-balance font-sans text-4xl font-semibold tracking-[-.045em] text-foreground sm:text-6xl">Aprende de quienes<br /><span className="text-neon-violet">ven más allá.</span></h2></div><p className="max-w-sm text-base leading-7 text-muted-foreground">Aprende de profesionales con años de experiencia en fotografía móvil y herramientas de IA.</p></div><div className="mt-14 grid grid-cols-2 gap-4 md:grid-cols-4">{names.map((name, index) => <article key={name} className="group"><div className="overflow-hidden rounded-2xl border border-white/10 bg-panel p-2"><img src={avatars[index]} alt={`${name}, instructor de fotografía`} loading="lazy" className="aspect-square w-full rounded-xl object-cover transition-transform duration-500 group-hover:scale-105" /></div><h3 className="mt-4 text-sm font-semibold text-foreground">{name}</h3></article>)}</div></Reveal></section> }
 
+export function Results() { 
+  return <section className="border-b border-white/10 bg-charcoal py-24 sm:py-32">
+    <Reveal className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="grid gap-12 lg:grid-cols-[.8fr_1.2fr] lg:items-center">
+        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-panel/60 p-2 shadow-2xl backdrop-blur-md">
+          <video 
+            src="/img/trucos-fotografia-curso.mp4" 
+            autoPlay 
+            muted 
+            playsInline 
+            loop 
+            preload="metadata"
+            crossOrigin="anonymous"
+            className="aspect-square w-full rounded-2xl object-cover" 
+          />
+        </div>
+        <div>
+          <Eyebrow>Los resultados</Eyebrow>
+          <h2 className="mt-5 max-w-2xl text-balance font-sans text-4xl font-semibold leading-[1.05] tracking-[-.045em] text-foreground sm:text-6xl">Resultados espectaculares.<br /><span className="text-neon-cyan">Rápido.</span></h2>
+          <p className="mt-7 max-w-xl text-lg leading-8 text-muted-foreground">Olvídate de la teoría fotográfica larga y aburrida. Cada video es corto y práctico. Puedes empezar a tomar mejores fotos hoy.</p>
+          <div className="mt-12 grid grid-cols-2 gap-6">
+            {['4 lecciones en video', 'Acceso de por vida', 'Aprende a tu propio ritmo', 'Sin teoría aburrida'].map((item, i) => (
+              <div key={i} className="space-y-2">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-neon-lime/10 border border-neon-lime/30">
+                  <CheckCircle2 className="h-5 w-5 text-neon-lime" />
+                </div>
+                <p className="text-sm font-medium text-foreground">{item}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </Reveal>
+  </section>
+}
+
+export function Confidence() { 
+  return <section className="border-b border-white/10 bg-panel py-24 sm:py-32">
+    <Reveal className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+        <div>
+          <Eyebrow>Nuevas habilidades</Eyebrow>
+          <h2 className="mt-5 max-w-2xl text-balance font-sans text-4xl font-semibold leading-[1.05] tracking-[-.045em] text-foreground sm:text-6xl">Fotos increíbles. En cualquier momento,<br /><span className="text-neon-lime">en cualquier lugar.</span></h2>
+          <p className="mt-7 max-w-xl text-lg leading-8 text-muted-foreground">Captura fotos impresionantes en cualquier situación. Desde atardeceres y momentos familiares hasta calles de la ciudad. Descubre cómo hacer que escenas ordinarias se vean increíbles.</p>
+        </div>
+        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-charcoal/70 p-8 backdrop-blur-md">
+          <p className="font-serif text-4xl leading-tight text-foreground">“Las escenas ordinarias pueden verse increíbles.”</p>
+        </div>
+      </div>
+    </Reveal>
+  </section>
+}
+
+export function Growth() { 
+  return <section className="border-b border-white/10 bg-charcoal py-24 sm:py-32">
+    <Reveal className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="grid gap-12 lg:grid-cols-[1.2fr_.8fr] lg:items-center">
+        <div>
+          <Eyebrow>La transformación</Eyebrow>
+          <h2 className="mt-5 max-w-2xl text-balance font-sans text-4xl font-semibold leading-[1.05] tracking-[-.045em] text-foreground sm:text-6xl">Fotografía con confianza.<br /><span className="text-neon-violet">Sé reconocido.</span></h2>
+          <p className="mt-7 max-w-xl text-lg leading-8 text-muted-foreground">Deja de dudar de cada foto que tomas. Captura imágenes que la gente realmente te elogie. Recibe muchos &apos;me gusta&apos; y comentarios en línea.</p>
+
+        </div>
+        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-panel/60 p-2 shadow-2xl backdrop-blur-md">
+          <img src={lessonImages[2]} alt="Fotografía profesional tomada con móvil" loading="lazy" className="aspect-square w-full rounded-2xl object-cover" />
+        </div>
+      </div>
+    </Reveal>
+  </section>
+}
+
 export function Testimonials() { const testimonials = [['Sarah J. – España', 'Por fin entiendo cómo hacer que la cámara de mi móvil trabaje para mí. Mis fotos han cambiado por completo.'], ['David R. – México', 'Las lecciones son sencillas, prácticas y útiles desde el primer momento.'], ['Emma K. – Reino Unido', 'La composición por fin cobró sentido. Ahora veo encuadres y líneas guía en todas partes.'], ['Luis G. – Argentina', 'Los prompts de IA han cambiado mi forma de editar mis fotos móviles.']]; return <section className="border-b border-white/10 bg-panel py-24 sm:py-32"><Reveal className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"><Eyebrow>Resultados de alumnos</Eyebrow><h2 className="mt-5 text-balance font-sans text-4xl font-semibold tracking-[-.045em] text-foreground sm:text-6xl">Una mirada mejor<br /><span className="text-neon-lime">empieza aquí.</span></h2><div className="mt-14 grid gap-4 sm:grid-cols-2">{testimonials.map(([name, quote], index) => <article key={name} className="rounded-2xl border border-white/10 bg-charcoal/70 p-6 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-neon-violet/50 sm:p-8"><div className="flex items-center gap-4"><img src={avatars[(index + 1) % avatars.length]} alt={`${name}, alumno del curso`} loading="lazy" className="h-12 w-12 rounded-full object-cover" /><div><h3 className="text-sm font-semibold text-foreground">{name}</h3><div className="mt-1 flex gap-1 text-neon-lime" aria-label="5 de 5 estrellas">{Array.from({ length: 5 }).map((_, i) => <Star key={i} className="h-3 w-3 fill-current" />)}</div></div></div><p className="mt-7 text-base leading-7 text-muted-foreground">&quot;{quote}&quot;</p></article>)}</div></Reveal></section> }
 
-export function FAQ() { const questions = ['¿Qué es el curso Starter?', '¿Cuánto duran las lecciones?', '¿Necesito una cámara profesional?', '¿Puedo acceder al curso desde el móvil?', '¿Qué pasa si tengo preguntas después del curso?']; const [open, setOpen] = useState<number | null>(null); return <section id="faq" className="bg-charcoal py-24 sm:py-32"><Reveal className="mx-auto max-w-3xl px-4 sm:px-6"><Eyebrow>Para saber más</Eyebrow><h2 className="mt-5 text-balance font-sans text-4xl font-semibold tracking-[-.045em] text-foreground sm:text-6xl">Preguntas,<br /><span className="text-neon-cyan">respuestas.</span></h2><div className="mt-14 divide-y divide-white/10 border-y border-white/10">{questions.map((question, index) => <div key={question}><button type="button" onClick={() => setOpen(open === index ? null : index)} aria-expanded={open === index} className="flex w-full items-center justify-between gap-6 py-6 text-left text-base font-semibold text-foreground transition-colors hover:text-neon-lime"><span>{question}</span><ChevronDown className={`h-5 w-5 shrink-0 text-neon-cyan transition-transform duration-300 ${open === index ? 'rotate-180' : ''}`} /></button>{open === index && <p className="pb-6 text-sm leading-7 text-muted-foreground">Starter incluye contenido práctico para ayudarte a hacer mejores fotos con tu móvil mediante técnicas sencillas y herramientas de IA.</p>}</div>)}</div></Reveal></section> }
+export function FAQ() { 
+  const qaPairs = [
+    { q: '¿Qué es el curso Starter?', a: 'Starter incluye contenido práctico para ayudarte a hacer mejores fotos con tu móvil mediante técnicas sencillas y herramientas de IA.' },
+    { q: '¿Cuánto duran las lecciones?', a: 'Este curso contiene lecciones en video cortas y prácticas. Puedes verlos desde cualquier lugar y a tu propio ritmo.' },
+    { q: '¿Necesito una cámara profesional?', a: 'No. Puedes completar este curso con cualquier smartphone reciente, incluyendo Android o iPhone.' },
+    { q: '¿Puedo acceder al curso desde el móvil?', a: 'Sí. Puedes ver todos los videos en tu smartphone o tablet, desde cualquier lugar.' },
+    { q: '¿Necesito experiencia previa?', a: 'No. El curso comienza desde el principio y avanza gradualmente hacia temas más avanzados.' },
+    { q: '¿Cuál es el formato del curso?', a: 'Este curso contiene lecciones en video cortas y prácticas. Puedes verlos desde cualquier lugar y a tu propio ritmo.' },
+    { q: '¿Qué pasa si tengo preguntas después del curso?', a: 'Tendrás acceso a toda la comunidad de alumnos y podrás hacer preguntas en los foros dedicados.' },
+  ];
+  const [open, setOpen] = useState<number | null>(null); 
+  return <section id="faq" className="bg-charcoal py-24 sm:py-32">
+    <Reveal className="mx-auto max-w-3xl px-4 sm:px-6">
+      <Eyebrow>Para saber más</Eyebrow>
+      <h2 className="mt-5 text-balance font-sans text-4xl font-semibold tracking-[-.045em] text-foreground sm:text-6xl">Preguntas,<br /><span className="text-neon-cyan">respuestas.</span></h2>
+      <div className="mt-14 divide-y divide-white/10 border-y border-white/10">
+        {qaPairs.map(({ q, a }, index) => (
+          <div key={q}>
+            <button 
+              type="button" 
+              onClick={() => setOpen(open === index ? null : index)} 
+              aria-expanded={open === index} 
+              className="flex w-full items-center justify-between gap-6 py-6 text-left text-base font-semibold text-foreground transition-colors hover:text-neon-lime"
+            >
+              <span>{q}</span>
+              <ChevronDown className={`h-5 w-5 shrink-0 text-neon-cyan transition-transform duration-300 ${open === index ? 'rotate-180' : ''}`} />
+            </button>
+            {open === index && <p className="pb-6 text-sm leading-7 text-muted-foreground">{a}</p>}
+          </div>
+        ))}
+      </div>
+    </Reveal>
+  </section>
+}
 
-export function FinalCTA() { return <section className="relative overflow-hidden border-y border-white/10 bg-[linear-gradient(120deg,#121a2d_0%,#201536_48%,#102b31_100%)] py-24 sm:py-32"><div className="absolute inset-0 opacity-25 [background-image:radial-gradient(rgba(177,125,255,.35)_1px,transparent_1px)] [background-size:18px_18px]" /><Reveal className="relative mx-auto max-w-4xl px-4 text-center sm:px-6"><Sparkles className="mx-auto h-7 w-7 text-neon-lime" /><h2 className="mx-auto mt-6 max-w-3xl text-balance font-sans text-5xl font-semibold leading-[.98] tracking-[-.06em] text-foreground sm:text-7xl">Empieza a hacer<br /><span className="bg-gradient-to-r from-neon-lime to-neon-cyan bg-clip-text text-transparent">mejores fotos hoy.</span></h2><p className="mx-auto mt-6 max-w-md text-base leading-7 text-foreground/65">Únete a los alumnos que han transformado su fotografía móvil.</p><EnrollButton className="mt-8">Inscríbete ahora – 19 USD</EnrollButton></Reveal></section> }
+export function FinalCTA() { 
+  const [timeLeft, setTimeLeft] = useState({ hours: 12, minutes: 0, seconds: 0 });
+  
+  useEffect(() => {
+    let remaining = 12 * 60 * 60;
+    
+    const timer = setInterval(() => {
+      remaining--;
+      
+      if (remaining <= 0) {
+        remaining = 12 * 60 * 60;
+      }
+      
+      const hours = Math.floor(remaining / 3600);
+      const minutes = Math.floor((remaining % 3600) / 60);
+      const seconds = remaining % 60;
+      
+      setTimeLeft({ hours, minutes, seconds });
+    }, 1000);
+    
+    setTimeLeft({
+      hours: Math.floor(remaining / 3600),
+      minutes: Math.floor((remaining % 3600) / 60),
+      seconds: remaining % 60,
+    });
+    
+    return () => clearInterval(timer);
+  }, []);
+  
+  return <section className="relative overflow-hidden border-y border-white/10 bg-[linear-gradient(120deg,#121a2d_0%,#201536_48%,#102b31_100%)] py-24 sm:py-32">
+    <div className="absolute inset-0 opacity-25 [background-image:radial-gradient(rgba(177,125,255,.35)_1px,transparent_1px)] [background-size:18px_18px]" />
+    <Reveal className="relative mx-auto max-w-4xl px-4 text-center sm:px-6">
+      <Sparkles className="mx-auto h-7 w-7 text-neon-lime" />
+      <h2 className="mx-auto mt-6 max-w-3xl text-balance font-sans text-5xl font-semibold leading-[.98] tracking-[-.06em] text-foreground sm:text-7xl">Empieza a hacer<br /><span className="bg-gradient-to-r from-neon-lime to-neon-cyan bg-clip-text text-transparent">mejores fotos hoy.</span></h2>
+      <p className="mx-auto mt-6 max-w-md text-base leading-7 text-foreground/65">Únete a los alumnos que han transformado su fotografía móvil.</p>
+      
+      <div className="mx-auto mt-8 flex flex-col items-center gap-4 sm:flex-row sm:items-center sm:justify-center">
+        <div className="flex items-center gap-3">
+          <span className="line-through text-lg text-muted-foreground">$89 USD</span>
+          <span className="text-3xl font-bold text-neon-lime">$19 USD</span>
+        </div>
+      </div>
+      
+      <div className="mx-auto mt-6 flex flex-col items-center gap-4 text-sm text-foreground/70">
+        <div className="flex items-center gap-2">
+          <Clock3 className="h-4 w-4 text-neon-pink" />
+          <span>Solo disponible por:</span>
+        </div>
+        <div className="flex gap-4 text-lg font-mono font-bold text-neon-lime">
+          <div className="flex flex-col items-center">
+            <span>{String(timeLeft.hours).padStart(2, '0')}</span>
+            <span className="text-xs text-foreground/60">horas</span>
+          </div>
+          <span className="self-start">:</span>
+          <div className="flex flex-col items-center">
+            <span>{String(timeLeft.minutes).padStart(2, '0')}</span>
+            <span className="text-xs text-foreground/60">min</span>
+          </div>
+          <span className="self-start">:</span>
+          <div className="flex flex-col items-center">
+            <span>{String(timeLeft.seconds).padStart(2, '0')}</span>
+            <span className="text-xs text-foreground/60">seg</span>
+          </div>
+        </div>
+      </div>
+      
+      <EnrollButton className="mt-10">Inscríbete ahora – $19 USD</EnrollButton>
+    </Reveal>
+  </section>
+}
 
 export function Footer() { return <footer className="bg-charcoal py-10"><div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8"><p className="text-xs text-muted-foreground">© 2026 Photo AI Academy. Todos los derechos reservados.</p><div className="flex flex-wrap items-center gap-5 text-xs text-muted-foreground"><a href="https://instagram.com/placeholder" className="transition-colors hover:text-neon-lime">Instagram</a><a href="https://facebook.com/placeholder" className="transition-colors hover:text-neon-lime">Facebook</a><a href="https://wa.me/1234567890" className="transition-colors hover:text-neon-lime">WhatsApp</a><a href="#" className="transition-colors hover:text-neon-lime">Términos de servicio</a><a href="#" className="transition-colors hover:text-neon-lime">Política de privacidad</a></div></div></footer> }
 
-export function AcademyLanding() { useEffect(() => { const observer = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) entry.target.classList.add('is-visible') }), { threshold: 0.12 }); const elements = document.querySelectorAll('.reveal'); elements.forEach((element) => observer.observe(element)); return () => observer.disconnect() }, []); return <><Header /><main><Hero /><Problem /><Solution /><Instructors /><Testimonials /><FAQ /><FinalCTA /></main><a href="https://wa.me/1234567890" aria-label="Contactar por WhatsApp" className="fixed bottom-5 right-5 z-30 flex h-12 w-12 items-center justify-center rounded-full border border-neon-lime/30 bg-charcoal text-neon-lime shadow-[0_0_24px_rgba(105,245,198,.2)] transition-all duration-300 hover:scale-110 hover:bg-neon-lime hover:text-charcoal"><MessageCircle className="h-5 w-5" /></a><Footer /></> }
+export function AcademyLanding() { 
+  useEffect(() => { 
+    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) entry.target.classList.add('is-visible') }), { threshold: 0.12 }); 
+    const elements = document.querySelectorAll('.reveal'); 
+    elements.forEach((element) => observer.observe(element)); 
+    return () => observer.disconnect() 
+  }, []); 
+  return <>
+    <Header />
+    <main>
+      <Hero />
+      <Problem />
+      <Formulas />
+      <Solution />
+      <Results />
+      <Confidence />
+      <Growth />
+      <Instructors />
+      <Testimonials />
+      <FAQ />
+      <FinalCTA />
+    </main>
+    <a href="https://wa.me/1234567890" aria-label="Contactar por WhatsApp" className="fixed bottom-5 right-5 z-30 flex h-12 w-12 items-center justify-center rounded-full border border-neon-lime/30 bg-charcoal text-neon-lime shadow-[0_0_24px_rgba(105,245,198,.2)] transition-all duration-300 hover:scale-110 hover:bg-neon-lime hover:text-charcoal"><MessageCircle className="h-5 w-5" /></a>
+    <Footer />
+  </> 
+}
 
 export const productJsonLd = { '@context': 'https://schema.org', '@type': 'Product', name: 'Starter', description: 'Contenido práctico para dominar la fotografía móvil con herramientas de IA.', offers: { '@type': 'Offer', price: '19', priceCurrency: 'USD', availability: 'https://schema.org/InStock' } }
 
@@ -72,4 +331,5 @@ void Clock3
 void Sparkles
 void MessageCircle
 void ArrowRight
+void CheckCircle2
 // The references above are used by JSX icons and retained by the bundler.
